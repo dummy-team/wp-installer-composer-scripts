@@ -66,14 +66,15 @@ class Parameters extends Script
                 $value = $io->ask(sprintf('<question>%s</question> (<comment>%s</comment>): ', $key, $default), $default);
 
                 $pattern = "/define\('".$key."',([ \t]*)('?)([\w ]*)('?)\);/";
-                if(preg_match($pattern, $targetContent)) {
+                if(preg_match($pattern, $targetContent, $matches)) {
+                    print_r($matches);
                     // replace existing entry (it only happen when wp-config.php doesn't exist)
                     $targetContent = preg_replace($pattern,
                         "define('".$key."',$1$2".$value."$4);",
                         $targetContent);
                 }else {
                     // it's a new entry
-                    $targetContent .= "define('".$key."', ".$constantsDist[3][$index].$value.$constantsDist[5][$index].");".PHP_EOL;
+                    $targetContent .= PHP_EOL."define('".$key."', ".$constantsDist[3][$index].$value.$constantsDist[5][$index].");".PHP_EOL;
                 }
             }
 
