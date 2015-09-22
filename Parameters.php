@@ -67,7 +67,6 @@ class Parameters extends Script
 
                 $pattern = "/define\('".$key."',([ \t]*)('?)([\w ]*)('?)\);/";
                 if(preg_match($pattern, $targetContent, $matches)) {
-                    print_r($matches);
                     // replace existing entry (it only happen when wp-config.php doesn't exist)
                     $targetContent = preg_replace($pattern,
                         "define('".$key."',$1$2".$value."$4);",
