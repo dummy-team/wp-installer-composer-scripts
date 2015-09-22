@@ -41,14 +41,14 @@ class Parameters extends Script
         preg_match_all("/define\('([\w ]*)',([ \t]*)('?)([\w ]*)('?)\);/", $distContent, $constantsDist);
 
         $targetFile = $config['destination-folder'].'wp-config.php';
+        $targetContent  = $distContent;
         if(!file_exists($targetFile)) {
             $io->write(sprintf('<info>Create "%s" file</info>', $targetFile));
             copy($config['parameter-file'], $targetFile);
-            $targetContent  = $distContent;
             $constantsTarget = [];
         }else {
             $targetContent  = file_get_contents($targetFile);
-            preg_match_all("/define\('([\w ]*)',([\w\t ']*)\);/", $targetContent, $matches);
+            preg_match_all("/define\('([\w ]*)',(.*)/", $targetContent, $matches);
             if($matches) {
                 $constantsTarget = $matches[1];
             }else {
