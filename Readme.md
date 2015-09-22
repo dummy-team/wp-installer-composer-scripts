@@ -26,9 +26,6 @@ This script build your *wp-config.php* and *wp-config.php.dist*, find all parame
 Add those lines to your *composer.json*
 ```
 "scripts": {
-    "post-create-project-cmd": [
-        "DummyTeam\\WpInstallerComposerScripts\\Parameters::build"
-    ],
     "post-install-cmd": [
         "DummyTeam\\WpInstallerComposerScripts\\Parameters::build"
     ],
