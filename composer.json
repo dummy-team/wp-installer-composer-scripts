@@ -9,6 +9,11 @@
             "email": "gregcop1@gmail.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "DummyTeam\\WpInstallerComposerScripts\\": ""
+        }
+    },
     "minimum-stability": "stable",
     "require": {}
 }
