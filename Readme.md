@@ -36,5 +36,14 @@ Add those lines to your *composer.json*
 ```
 The next time, you'll execute `composer install`, `composer update` or `composer create-project ...` the script will parse your configuration
 
-### Prepare structure
 ### Prepare Git
+Add those lines to your *composer.json*
+```
+"scripts": {
+    "post-create-project-cmd": [
+        "DummyTeam\\WpInstallerComposerScripts\\Git::build"
+    ]
+}
+```
+
+### Prepare structure
