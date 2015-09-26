@@ -45,5 +45,15 @@ Add those lines to your *composer.json*
     ]
 }
 ```
+The next time, you'll execute `composer create-project ...` the script will parse your configuration
 
 ### Prepare structure
+Add those lines to your *composer.json*
+```
+"scripts": {
+    "post-create-project-cmd": [
+        "DummyTeam\\WpInstallerComposerScripts\\Structure::build"
+    ]
+}
+```
+The next time, you'll execute `composer create-project ...` the script will parse your configuration

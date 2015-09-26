@@ -8,14 +8,17 @@ class Parameters extends Script
     public static function getExtras(Event $event)
     {
         $extras = parent::getExtras($event);
-        if (!isset($extras['dummyteam-parameters']['parameter-file'])) {
-            throw new \InvalidArgumentException('You must set wordpress config file path in  extra.dummyteam-parameters settings.parameter-file');
-        }
-        if(!file_exists($extras['dummyteam-parameters']['parameter-file'])) {
-            throw new \InvalidArgumentException('File "'.$extras['dummyteam-parameters']['parameter-file'].'" set in extra.dummyteam-parameters.parameter-file doesn\'t exist');
-        }
         if (!isset($extras['dummyteam-parameters']['destination-folder'])) {
             $extras['dummyteam-parameters']['destination-folder'] = ($extras['webroot-dir'] ? $extras['webroot-dir'] .'/../' : 'web/');
+        }
+        if (!isset($extras['dummyteam-parameters']['wordpress-folder'])) {
+            throw new \InvalidArgumentException('You must set wordpress folder name in extra.dummyteam-parameters.wordpress-folder');
+        }
+        if (!isset($extras['dummyteam-parameters']['parameter-file'])) {
+            throw new \InvalidArgumentException('You must set wordpress config file path in  extra.dummyteam-parameters.parameter-file');
+        }
+        if(!file_exists($extras['dummyteam-parameters']['destination-folder'].$extras['dummyteam-parameters']['wordpress-folder'].$extras['dummyteam-parameters']['parameter-file'])) {
+            throw new \InvalidArgumentException('File "'.$extras['dummyteam-parameters']['parameter-file'].'" set in extra.dummyteam-parameters.parameter-file doesn\'t exist');
         }
         return $extras;
     }
@@ -33,7 +36,7 @@ class Parameters extends Script
         $distFile = $config['destination-folder'].'wp-config.php.dist';
         if(!file_exists($distFile)) {
             $io->write(sprintf('<info>Create "%s" file</info>', $distFile));
-            copy($config['parameter-file'], $distFile);
+            copy($config['destination-folder'].$config['wordpress-folder'].$config['parameter-file'], $distFile);
         }
 
         // get constants definition from dist file
@@ -44,7 +47,7 @@ class Parameters extends Script
         $targetContent  = $distContent;
         if(!file_exists($targetFile)) {
             $io->write(sprintf('<info>Create "%s" file</info>', $targetFile));
-            copy($config['parameter-file'], $targetFile);
+            copy($config['destination-folder'].$config['wordpress-folder'].$config['parameter-file'], $targetFile);
             $constantsTarget = [];
         }else {
             $targetContent  = file_get_contents($targetFile);
