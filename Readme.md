@@ -1,4 +1,6 @@
 # Wordpress installer - composer scripts
+
+[![Join the chat at https://gitter.im/dummy-team/wp-installer-composer-scripts](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/dummy-team/wp-installer-composer-scripts?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 Thoses scripts are used in [wp-installer package](git@github.com:dummy-team/wp-installer.git) and can be called after composers events (create-project, install and update)
 
 ## Installation
